@@ -16,13 +16,17 @@ public class Profissional {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="profissional_id")
     private int matricula;
+    @Column(length = 100)
     private String nome;
 
     @ManyToOne
+    @JoinColumn(name = "profissional_id")
     private Profissional gerente;
+    @Column(name="flag_gerente")
     private boolean flagGerente;
 
     @OneToMany
+    @JoinColumn(name = "prioridade_id")
     private List<Prioridade> prioridades;
 
 }
