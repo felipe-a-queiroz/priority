@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
@@ -14,12 +13,12 @@ import java.util.List;
 public class Prioridade {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="prioridade_id")
     private int id;
     private String nome;
     private String descricao;
-    private Date dataLimite;
+    private LocalDate dataLimite;
 
     @OneToMany
     private List<Meta> metasAtendidas;

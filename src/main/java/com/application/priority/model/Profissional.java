@@ -13,7 +13,7 @@ import java.util.*;
 public class Profissional {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="profissional_id")
     private int matricula;
     private String nome;
