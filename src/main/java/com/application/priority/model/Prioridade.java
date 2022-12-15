@@ -1,21 +1,19 @@
 package com.application.priority.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data @Builder @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter
+@Builder @NoArgsConstructor @AllArgsConstructor
 @Entity @Table(name="prioridades")
 public class Prioridade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="prioridade_id")
-    private int id;
+    private Integer id;
     @Column(length = 100)
     private String nome;
     @Column(length = 300)
