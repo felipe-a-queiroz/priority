@@ -13,7 +13,7 @@ public class Profissional {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="profissional_id")
-    private int matricula;
+    private Integer matricula;
     @Column(length = 100)
     private String nome;
 

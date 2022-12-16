@@ -20,7 +20,7 @@ public class Prioridade {
     private String descricao;
     private LocalDate dataLimite;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "profissional_id")
     private Profissional profissional;
 

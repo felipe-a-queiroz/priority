@@ -3,14 +3,19 @@ package com.application.priority.service;
 import com.application.priority.model.Profissional;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProfissionalService {
 
-    Profissional salvar(Profissional profissional);
+    Profissional salvar(String nome);
 
     List<Profissional> listarProfissionais();
 
-    Profissional atualizar(Profissional profissional, int matricula);
+    Profissional buscarPorNome(String nome);
+
+    Optional<Profissional> buscarPorId(Integer matricula);
+
+    Profissional atualizar(String nome, Integer matricula);
 
     void remover(int matricula);
 

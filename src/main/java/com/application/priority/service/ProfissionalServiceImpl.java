@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfissionalServiceImpl implements ProfissionalService{
@@ -14,7 +15,8 @@ public class ProfissionalServiceImpl implements ProfissionalService{
     private ProfissionalRepository profissionalRepository;
 
     @Override
-    public Profissional salvar(Profissional profissional) {
+    public Profissional salvar(String nome) {
+        Profissional profissional = Profissional.builder().nome(nome).build();
         return profissionalRepository.save(profissional);
     }
 
@@ -24,9 +26,19 @@ public class ProfissionalServiceImpl implements ProfissionalService{
     }
 
     @Override
-    public Profissional atualizar(Profissional profissional, int matricula) {
+    public Profissional buscarPorNome(String nome) {
+        return profissionalRepository.findByNome(nome).get(0);
+    }
+
+    @Override
+    public Optional<Profissional> buscarPorId(Integer matricula) {
+        return Optional.of(profissionalRepository.findById(matricula).get());
+    }
+
+    @Override
+    public Profissional atualizar(String nome, Integer matricula) {
         Profissional profissionalExistente = profissionalRepository.findById(matricula).get();
-        profissionalExistente.setNome(profissionalExistente.getNome());
+        profissionalExistente.setNome(nome);
         return profissionalRepository.save(profissionalExistente);
     }
 
