@@ -3,7 +3,7 @@ package com.application.priority.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.*;
+import java.util.List;
 
 @Getter @Setter
 @Builder @NoArgsConstructor @AllArgsConstructor
@@ -17,8 +17,7 @@ public class Profissional {
     @Column(length = 100)
     private String nome;
 
-    @OneToMany
-    @JoinColumn(name = "prioridade_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "profissional")
     private List<Prioridade> prioridades;
 
 }
