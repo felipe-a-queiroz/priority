@@ -33,7 +33,12 @@ public class ProfissionalController {
 
     @PutMapping
     public Profissional atualizarProfissional(@RequestBody Profissional profissional){
-        return profissionalService.atualizar(profissional);
+        Optional<Profissional> profissionalExistente = profissionalService.buscarPorId(profissional.getMatricula());
+        if(profissionalExistente.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, PROFISSIONAL_NAO_EXISTENTE);
+        }else{
+            return profissionalService.atualizar(profissional);
+        }
     }
 
     @DeleteMapping(value = "/{matricula}")
