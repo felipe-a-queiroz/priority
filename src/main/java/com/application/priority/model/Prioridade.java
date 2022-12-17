@@ -23,6 +23,11 @@ public class Prioridade {
     private String descricao;
     private LocalDate dataLimite;
 
+    @OneToOne
+    @JoinColumn(name = "status_id", foreignKey = @ForeignKey(name = "fk_status_id"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Status status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profissional_id", foreignKey = @ForeignKey(name = "fk_profissional_id"))
     @JsonIgnore
