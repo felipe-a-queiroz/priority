@@ -15,8 +15,7 @@ public class ProfissionalServiceImpl implements ProfissionalService{
     private ProfissionalRepository profissionalRepository;
 
     @Override
-    public Profissional salvar(String nome) {
-        Profissional profissional = Profissional.builder().nome(nome).build();
+    public Profissional salvar(Profissional profissional) {
         return profissionalRepository.save(profissional);
     }
 

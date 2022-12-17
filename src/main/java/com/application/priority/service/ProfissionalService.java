@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ProfissionalService {
 
-    Profissional salvar(String nome);
+    Profissional salvar(Profissional profissional);
 
     List<Profissional> listarProfissionais();
 
