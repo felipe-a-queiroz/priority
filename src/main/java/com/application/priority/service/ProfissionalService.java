@@ -15,8 +15,8 @@ public interface ProfissionalService {
 
     Optional<Profissional> buscarPorId(Integer matricula);
 
-    Profissional atualizar(String nome, Integer matricula);
+    Profissional atualizar(Profissional profissional);
 
-    void remover(int matricula);
+    void remover(Integer matricula);
 
 }

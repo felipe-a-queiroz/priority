@@ -14,7 +14,7 @@ public class Profissional {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="profissional_id")
     private Integer matricula;
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String nome;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "profissional")

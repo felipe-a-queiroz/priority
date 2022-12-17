@@ -17,19 +17,20 @@ public class Prioridade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="prioridade_id")
     private Integer id;
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String nome;
-    @Column(length = 300)
+    @Column(length = 300, nullable = false)
     private String descricao;
+    @Column(nullable = false)
     private LocalDate dataLimite;
 
     @OneToOne
-    @JoinColumn(name = "status_id", foreignKey = @ForeignKey(name = "fk_status_id"))
+    @JoinColumn(name = "status_id", foreignKey = @ForeignKey(name = "fk_status_id"), nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profissional_id", foreignKey = @ForeignKey(name = "fk_profissional_id"))
+    @JoinColumn(name = "profissional_id", foreignKey = @ForeignKey(name = "fk_profissional_id"), nullable = false)
     @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Profissional profissional;

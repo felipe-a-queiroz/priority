@@ -31,18 +31,18 @@ public class ProfissionalServiceImpl implements ProfissionalService{
 
     @Override
     public Optional<Profissional> buscarPorId(Integer matricula) {
-        return Optional.of(profissionalRepository.findById(matricula).get());
+        return profissionalRepository.findById(matricula);
     }
 
     @Override
-    public Profissional atualizar(String nome, Integer matricula) {
-        Profissional profissionalExistente = profissionalRepository.findById(matricula).get();
-        profissionalExistente.setNome(nome);
+    public Profissional atualizar(Profissional profissional) {
+        Profissional profissionalExistente = profissionalRepository.findById(profissional.getMatricula()).get();
+        profissionalExistente.setNome(profissional.getNome());
         return profissionalRepository.save(profissionalExistente);
     }
 
     @Override
-    public void remover(int matricula) {
+    public void remover(Integer matricula) {
         profissionalRepository.deleteById(matricula);
     }
 }
