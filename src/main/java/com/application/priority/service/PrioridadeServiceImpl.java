@@ -25,6 +25,11 @@ public class PrioridadeServiceImpl implements PrioridadeService {
     }
 
     @Override
+    public List<Prioridade> listarPrioridadesDeUmProfissional(Integer matricula) {
+        return prioridadeRepository.findByProfissionalMatricula(matricula);
+    }
+
+    @Override
     public Prioridade cadastrarPrioridade(String nome, String descricao, LocalDate dataLimite, String nomeFuncionario) {
         Prioridade prioridade = Prioridade.builder()
                 .nome(nome)

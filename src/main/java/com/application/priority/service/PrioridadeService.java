@@ -12,4 +12,6 @@ public interface PrioridadeService {
     Prioridade cadastrarPrioridadeUtilizandoMatricula(String nome, String descricao, LocalDate dataLimite, Integer matricula);
 
     List<Prioridade> listarTodasAsPrioridades();
+
+    List<Prioridade> listarPrioridadesDeUmProfissional(Integer matricula);
 }
