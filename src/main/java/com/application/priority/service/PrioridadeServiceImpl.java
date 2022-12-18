@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +18,11 @@ public class PrioridadeServiceImpl implements PrioridadeService {
 
     @Autowired
     private ProfissionalService profissionalService;
+
+    @Override
+    public List<Prioridade> listarTodasAsPrioridades(){
+        return prioridadeRepository.findAll();
+    }
 
     @Override
     public Prioridade cadastrarPrioridade(String nome, String descricao, LocalDate dataLimite, String nomeFuncionario) {
