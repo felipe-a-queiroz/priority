@@ -29,9 +29,8 @@ public class Prioridade {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Status status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "profissional_id", foreignKey = @ForeignKey(name = "fk_profissional_id"), nullable = false)
-    @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Profissional profissional;
 
