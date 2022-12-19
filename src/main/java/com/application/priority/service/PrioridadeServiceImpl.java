@@ -3,6 +3,7 @@ package com.application.priority.service;
 import com.application.priority.model.Prioridade;
 import com.application.priority.model.Profissional;
 import com.application.priority.model.Status;
+import com.application.priority.model.StatusEnum;
 import com.application.priority.repository.PrioridadeRepository;
 import com.application.priority.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,18 @@ public class PrioridadeServiceImpl implements PrioridadeService {
     @Override
     public Optional<Status> retrieveStatusByNome(String nome) {
         return statusRepository.findByNome(nome);
+    }
+
+    @Override
+    public Prioridade concluirPrioridade(Prioridade prioridade) {
+        Optional<Status> status = retrieveStatusByNome(StatusEnum.COMPLETED.getNome());
+        prioridade.setStatus(status.get());
+        return prioridadeRepository.save(prioridade);
+    }
+
+    @Override
+    public Optional<Prioridade> findById(Integer prioridadeId) {
+        return prioridadeRepository.findById(prioridadeId);
     }
 
     @Override

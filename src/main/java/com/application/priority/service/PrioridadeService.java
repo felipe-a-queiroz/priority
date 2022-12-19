@@ -16,4 +16,8 @@ public interface PrioridadeService {
     List<Prioridade> listarPrioridadesDeUmProfissional(Integer matricula);
 
     Optional<Status> retrieveStatusByNome(String nome);
+
+    Prioridade concluirPrioridade(Prioridade prioridade);
+
+    Optional<Prioridade> findById(Integer prioridadeId);
 }

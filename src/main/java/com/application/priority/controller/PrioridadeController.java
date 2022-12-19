@@ -37,6 +37,16 @@ public class PrioridadeController {
         return prioridadeService.listarPrioridadesDeUmProfissional(matricula);
     }
 
+    @PutMapping("/{prioridadeId}")
+    public Prioridade concluirPrioridade(@PathVariable Integer prioridadeId){
+        Optional<Prioridade> prioridade = prioridadeService.findById(prioridadeId);
+        if(prioridade.isPresent()){
+            return prioridadeService.concluirPrioridade(prioridade.get());
+        }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null);
+        }
+    }
+
     @PostMapping
     public Prioridade cadastrarPrioridade(@RequestBody PrioridadeRecord prioridadeRecord){
         Prioridade prioridade = Prioridade.builder()
