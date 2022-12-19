@@ -7,9 +7,7 @@ import java.util.List;
 
 public interface PrioridadeService {
 
-    Prioridade cadastrarPrioridade(String nome, String descricao, LocalDate dataLimite, String nomeFuncionario);
-
-    Prioridade cadastrarPrioridadeUtilizandoMatricula(String nome, String descricao, LocalDate dataLimite, Integer matricula);
+    Prioridade cadastrarPrioridade(Prioridade prioridade);
 
     List<Prioridade> listarTodasAsPrioridades();
 

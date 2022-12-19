@@ -3,10 +3,7 @@ package com.application.priority.controller;
 import com.application.priority.model.Prioridade;
 import com.application.priority.service.PrioridadeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,10 @@ public class PrioridadeController {
     @GetMapping("/{matricula}")
     public List<Prioridade> listarPrioridadesDeUmProfissional(@PathVariable Integer matricula){
         return prioridadeService.listarPrioridadesDeUmProfissional(matricula);
+    }
+
+    @PostMapping
+    public Prioridade cadastrarPrioridade(@RequestBody Prioridade prioridade){
+        return prioridadeService.cadastrarPrioridade(prioridade);
     }
 }

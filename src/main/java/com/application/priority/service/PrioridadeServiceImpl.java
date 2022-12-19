@@ -30,33 +30,14 @@ public class PrioridadeServiceImpl implements PrioridadeService {
     }
 
     @Override
-    public Prioridade cadastrarPrioridade(String nome, String descricao, LocalDate dataLimite, String nomeFuncionario) {
-        Prioridade prioridade = Prioridade.builder()
-                .nome(nome)
-                .descricao(descricao)
-                .dataLimite(dataLimite)
-                .build();
-
-        Profissional profissional = profissionalService.buscarPorNome(nomeFuncionario);
-        prioridade.setProfissional(profissional);
-
-        return prioridadeRepository.save(prioridade);
-    }
-
-    @Override
-    public Prioridade cadastrarPrioridadeUtilizandoMatricula(String nome, String descricao, LocalDate dataLimite, Integer matricula) {
-        Prioridade prioridade = Prioridade.builder()
-                .nome(nome)
-                .descricao(descricao)
-                .dataLimite(dataLimite)
-                .build();
-
-        Optional<Profissional> profissional = profissionalService.buscarPorId(matricula);
-
-        if(profissional.isPresent()){
-            prioridade.setProfissional(profissional.get());
+    public Prioridade cadastrarPrioridade(Prioridade prioridade) {
+        if(prioridade.getProfissional().getNome() == null){
+            Optional<Profissional> profissional = profissionalService.buscarPorId(prioridade.getProfissional().getMatricula());
+            if(profissional.isPresent()){
+                prioridade.setProfissional(profissional.get());
+            }
         }
-
         return prioridadeRepository.save(prioridade);
     }
+
 }
