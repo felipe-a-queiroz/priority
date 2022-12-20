@@ -1,5 +1,6 @@
 package com.application.priority.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,7 +18,8 @@ public class Profissional {
     @Column(length = 100, nullable = false)
     private String nome;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "profissional")
+    @OneToMany(mappedBy = "profissional")
+    @JsonIgnore
     private List<Prioridade> prioridades;
 
 }
