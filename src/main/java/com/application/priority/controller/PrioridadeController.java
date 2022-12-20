@@ -1,9 +1,6 @@
 package com.application.priority.controller;
 
-import com.application.priority.model.Prioridade;
-import com.application.priority.model.PrioridadeRecord;
-import com.application.priority.model.Profissional;
-import com.application.priority.model.Status;
+import com.application.priority.model.*;
 import com.application.priority.service.PrioridadeService;
 import com.application.priority.service.ProfissionalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,7 @@ public class PrioridadeController {
     private ProfissionalService profissionalService;
 
     private final String PROFISSIONAL_NAO_EXISTENTE = "Profissional não existente";
+    private final String PRIORIDADE_NAO_EXISTENTE = "Prioridade não existente";
     private final String STATUS_NAO_EXISTENTE = "Status não existente";
 
     @GetMapping
@@ -56,17 +54,42 @@ public class PrioridadeController {
                 .build();
 
         Optional<Status> status = prioridadeService.retrieveStatusByNome(prioridadeRecord.status().getNome());
-        if(status.isPresent()){
-            prioridade.setStatus(status.get());
-        }else{
+        if(status.isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, STATUS_NAO_EXISTENTE);
         }
+        prioridade.setStatus(status.get());
         Optional<Profissional> profissional = profissionalService.buscarPorId(prioridadeRecord.matricula());
-        if(profissional.isPresent()){
-            prioridade.setProfissional(profissional.get());
-        }else{
+        if(profissional.isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, PROFISSIONAL_NAO_EXISTENTE);
         }
+        prioridade.setProfissional(profissional.get());
+
+        return prioridadeService.cadastrarPrioridade(prioridade);
+    }
+
+    @PutMapping
+    public Prioridade atualizar(@RequestBody PrioridadeAtualizarRecord prioridadeAtualizarRecord){
+        Optional<Prioridade> prioridadeExistente = prioridadeService.findById(prioridadeAtualizarRecord.id());
+        if(prioridadeExistente.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, PRIORIDADE_NAO_EXISTENTE);
+        }
+
+        Prioridade prioridade = prioridadeExistente.get();
+
+        Optional<Status> status = prioridadeService.retrieveStatusByNome(prioridadeAtualizarRecord.status().getNome());
+        if(status.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, STATUS_NAO_EXISTENTE);
+        }
+        prioridade.setStatus(status.get());
+        Optional<Profissional> profissional = profissionalService.buscarPorId(prioridadeAtualizarRecord.matricula());
+        if(profissional.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, PROFISSIONAL_NAO_EXISTENTE);
+        }
+        prioridade.setProfissional(profissional.get());
+
+        prioridade.setNome(prioridadeAtualizarRecord.nome());
+        prioridade.setDescricao(prioridadeAtualizarRecord.descricao());
+        prioridade.setDataLimite(prioridadeAtualizarRecord.dataLimite());
 
         return prioridadeService.cadastrarPrioridade(prioridade);
     }

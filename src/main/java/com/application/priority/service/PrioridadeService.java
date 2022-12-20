@@ -20,4 +20,6 @@ public interface PrioridadeService {
     Prioridade concluirPrioridade(Prioridade prioridade);
 
     Optional<Prioridade> findById(Integer prioridadeId);
+
+    Prioridade atualizar(Prioridade prioridade);
 }

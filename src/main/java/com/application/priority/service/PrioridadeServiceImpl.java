@@ -53,6 +53,11 @@ public class PrioridadeServiceImpl implements PrioridadeService {
     }
 
     @Override
+    public Prioridade atualizar(Prioridade prioridade) {
+        return prioridadeRepository.save(prioridade);
+    }
+
+    @Override
     public Prioridade cadastrarPrioridade(Prioridade prioridade) {
         if(prioridade.getProfissional().getNome() == null){
             Optional<Profissional> profissional = profissionalService.buscarPorId(prioridade.getProfissional().getMatricula());
