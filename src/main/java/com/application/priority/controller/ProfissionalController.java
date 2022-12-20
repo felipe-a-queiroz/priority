@@ -36,9 +36,8 @@ public class ProfissionalController {
         Optional<Profissional> profissionalExistente = profissionalService.buscarPorId(profissional.getMatricula());
         if(profissionalExistente.isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, PROFISSIONAL_NAO_EXISTENTE);
-        }else{
-            return profissionalService.atualizar(profissional);
         }
+        return profissionalService.atualizar(profissional);
     }
 
     @DeleteMapping(value = "/{matricula}")
@@ -46,10 +45,9 @@ public class ProfissionalController {
         Optional<Profissional> profissional = profissionalService.buscarPorId(matricula);
         if(profissional.isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, PROFISSIONAL_NAO_EXISTENTE);
-        }else{
-            profissionalService.remover(matricula);
-            return ResponseEntity.ok().build();
         }
+        profissionalService.remover(matricula);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping()

@@ -22,4 +22,6 @@ public interface PrioridadeService {
     Optional<Prioridade> findById(Integer prioridadeId);
 
     Prioridade atualizar(Prioridade prioridade);
+
+    void remover(Prioridade prioridade);
 }

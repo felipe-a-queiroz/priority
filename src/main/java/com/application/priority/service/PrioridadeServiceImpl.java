@@ -58,6 +58,11 @@ public class PrioridadeServiceImpl implements PrioridadeService {
     }
 
     @Override
+    public void remover(Prioridade prioridade) {
+        prioridadeRepository.delete(prioridade);
+    }
+
+    @Override
     public Prioridade cadastrarPrioridade(Prioridade prioridade) {
         if(prioridade.getProfissional().getNome() == null){
             Optional<Profissional> profissional = profissionalService.buscarPorId(prioridade.getProfissional().getMatricula());

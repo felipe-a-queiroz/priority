@@ -5,6 +5,7 @@ import com.application.priority.service.PrioridadeService;
 import com.application.priority.service.ProfissionalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -92,5 +93,15 @@ public class PrioridadeController {
         prioridade.setDataLimite(prioridadeAtualizarRecord.dataLimite());
 
         return prioridadeService.cadastrarPrioridade(prioridade);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity remover(@PathVariable Integer id){
+        Optional<Prioridade> prioridade = prioridadeService.findById(id);
+        if(prioridade.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, PRIORIDADE_NAO_EXISTENTE);
+        }
+        prioridadeService.remover(prioridade.get());
+        return ResponseEntity.ok().build();
     }
 }
